@@ -52,4 +52,18 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 
     document.getElementById('year').innerText = '' + new Date().getFullYear();
+
+    const userLang = navigator.language || navigator.userLanguage || '';
+    const lang = userLang.startsWith("el") ? 'el' : 'en';
+    switchLanguage(lang);
+
+    document.getElementById('languageSwitchEnglish').addEventListener('click', e => switchLanguage('en'));
+    document.getElementById('languageSwitchGreek').addEventListener('click', e => switchLanguage('el'));
 });
+
+function switchLanguage(lang) {
+    lang = lang || 'el';
+    const disableLang = lang === 'el' ? 'en' : 'el';
+    document.querySelectorAll('.text-' + lang).forEach(e => e.classList.remove('d-none'));
+    document.querySelectorAll('.text-' + disableLang).forEach(e => e.classList.add('d-none'));
+}
